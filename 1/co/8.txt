@@ -1,0 +1,175 @@
+Adventuregames.java
+
+
+public class AdventureGames extends Outdoor {
+
+	@Override
+	public void stock() {
+		System.out.println("STOCK of outdoor AdventureGames:100");
+	}
+}
+
+
+Athletics.java
+
+
+
+public class Athletics extends Outdoor {
+
+	@Override
+	public void stock() {
+		System.out.println("STOCK of outdoor Athletics :100");
+	}
+
+}
+
+
+basicstock.java
+
+
+public class BasicStock extends getcurrentStock {
+	@Override
+	public void stock() {
+		System.out.println("Basic Stocks: 100");
+	}
+}
+
+
+boardgames.java
+
+
+public class BoardGames extends Indoor {
+
+	@Override
+	public void stock() {
+		System.out.println("STOCK of INDOOR BOARD GAME:100");
+	}
+
+}
+
+
+client.java
+
+
+import java.util.Scanner;
+public class client {
+	public static void main(String args[]) {
+		getcurrentStock s;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("enter choice: 1.indoor \n2.outdoor\n");
+		int ch = Integer.parseInt(sc.nextLine());
+		if(ch==1) {
+			System.out.println("enter choice: 1.GamesOnTable \n2.BoardGames\n3.CourtGames\n");
+			int h = Integer.parseInt(sc.nextLine());
+			if(h==1) {
+				s = new GamesOnTable();
+			}
+			else if(h==2) {
+				s = new BoardGames();
+			}
+			else {
+				s = new CourtGames();
+			}
+		}
+		else {
+			System.out.println("enter choice: 1.AdventureGames \n2.StadiumGames \n3.Athletics\n");
+			int h = Integer.parseInt(sc.nextLine());
+			if(h==1) {
+				s = new AdventureGames();
+			}
+			else if(h==2) {
+				s = new StadiumGames();
+			}
+			else {
+				s = new Athletics();
+			}
+		}
+		s.stock();
+	}
+}
+
+
+courtgames.java
+
+
+
+public class CourtGames extends Indoor {
+
+	@Override
+	public void stock() {
+		System.out.println("STOCK of Indoor CourtGames :100");
+	}
+
+}
+
+
+
+gamesontable.java
+
+
+public class GamesOnTable extends Indoor {
+	 
+	@Override
+	public void stock(){
+		System.out.println("STOCK of Indoor _ GAME ON TABLE:200");
+	}
+}
+
+
+getcurrentstock.java
+
+
+public abstract class getcurrentStock {
+	public getcurrentStock() {
+		
+	}
+	public abstract void stock();
+}
+
+
+indoor.java
+
+
+
+public abstract class Indoor extends SportStock {
+
+	@Override
+	public abstract void stock();
+
+}
+
+
+outdoor.java
+
+
+
+public abstract class Outdoor extends SportStock {
+	@Override
+	public abstract void stock();
+
+}
+
+
+sportstock.java
+
+public abstract class SportStock extends getcurrentStock {
+	public getcurrentStock basicstock = new BasicStock();
+	SportStock(){
+		basicstock.stock();
+	}
+	@Override
+	public abstract void stock();
+	
+}
+
+
+stadiumgames.java
+
+
+public class StadiumGames extends Outdoor {
+
+	@Override
+	public void stock() {
+		System.out.println("STOCK of outdoor Stadiumgames :100");
+	}
+}

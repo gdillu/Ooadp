@@ -1,0 +1,143 @@
+Customer.java
+package tryStrategy;
+
+public abstract class Customer {
+
+	String id,name,typeOfCust;
+	Discount d;
+	
+	public Customer(String id,String name) {
+		// TODO Auto-generated constructor stub
+		this.id=id;
+		this.name=name;
+	}
+	
+	void printBill(float amt) {
+		System.out.println("\nID: "+id);
+		System.out.println("Name: "+name);
+		System.out.println("Type of Customer: "+typeOfCust);
+		System.out.println("Gross Amount: "+amt);
+		System.out.println("Discount: "+d.calcDiscount(amt));
+		System.out.println("Amount Payable: "+(amt-d.calcDiscount(amt)));
+		
+	}
+	
+}
+
+Discount.java
+package tryStrategy;
+
+public interface Discount {
+	float calcDiscount(float amount);
+
+}
+
+FTCCustomer.java
+package tryStrategy;
+
+public class FTCCustomer extends Customer {
+
+	public FTCCustomer(String id, String name) {
+		super(id, name);
+		this.d=new FTCDiscount();
+		typeOfCust="First Time Customer";
+		// TODO Auto-generated constructor stub
+	}
+
+}
+FTCDiscount.java
+
+package tryStrategy;
+
+public class FTCDiscount implements Discount {
+
+	@Override
+	public float calcDiscount(float amount) {
+		// TODO Auto-generated method stub
+		return 0.15f*amount;
+	}
+
+}
+
+
+RCCustomer.java
+
+package tryStrategy;
+
+public class RCCustomer extends Customer {
+
+	public RCCustomer(String id, String name) {
+		super(id, name);
+		d=new RCDiscount();
+		typeOfCust="Regular Customer";
+		
+		// TODO Auto-generated constructor stub
+	}
+
+}
+
+RCDiscount.java
+
+package tryStrategy;
+
+import java.nio.file.DirectoryStream;
+
+public class RCDiscount implements Discount{
+
+	@Override
+	public float calcDiscount(float amount) {
+		// TODO Auto-generated method stub
+		return 0.12f*amount;
+	}
+
+}
+
+
+
+SCCustomer.java
+package tryStrategy;
+
+public class SCCustomer extends Customer {
+
+	public SCCustomer(String id, String name) {
+		super(id, name);
+		this.d=new SCDiscount();
+		this.typeOfCust="Senior Customer";
+		// TODO Auto-generated constructor stub
+	}
+
+}
+
+SCDiscount.java
+package tryStrategy;
+
+public class SCDiscount implements Discount {
+
+	@Override
+	public float calcDiscount(float amount) {
+		// TODO Auto-generated method stub
+		return 0.1f*amount;
+	}
+
+}
+
+StrategyDemo.java
+package tryStrategy;
+
+public class StrategyDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Customer c1=new RCCustomer("rc1", "modi");
+		c1.printBill(100);
+		
+		c1=new SCCustomer("sc1", "trump");
+		c1.printBill(100);
+		
+		c1=new FTCCustomer("ftc1", "raga");
+		c1.printBill(100);
+		
+	}
+
+}
